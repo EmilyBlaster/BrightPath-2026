@@ -1338,6 +1338,394 @@ ul { list-style: none; }
   }
   html { scroll-behavior: auto; }
 }
+
+/* ========================================
+   REVIEW MODE STYLES
+   ======================================== */
+@keyframes reviewPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229,35,255,0.5); }
+  50% { box-shadow: 0 0 12px 4px rgba(229,35,255,0.3); }
+}
+
+@keyframes reviewToastIn {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+@keyframes reviewToastOut {
+  from { transform: translateX(-50%) translateY(0); opacity: 1; }
+  to { transform: translateX(-50%) translateY(20px); opacity: 0; }
+}
+
+@keyframes reviewPanelSlideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes reviewPanelSlideOut {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+
+.review-nav-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  background: #E523FF;
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: reviewPulse 2s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.review-pin {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+  pointer-events: auto;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.review-pin:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.review-pin.review-pin--resolved {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+
+.review-form {
+  position: absolute;
+  z-index: 10002;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  width: 280px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  color: #060B2B;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.review-form input,
+.review-form textarea {
+  display: block;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+  outline: none;
+  color: #060B2B;
+  background: #f9f9f9;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+  border-color: #3D6AFF;
+  background: #fff;
+}
+
+.review-form textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.review-form__buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.review-form__btn {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.review-form__btn--submit {
+  background: #3D6AFF;
+  color: #fff;
+}
+
+.review-form__btn--submit:hover {
+  background: #2b55e0;
+}
+
+.review-form__btn--cancel {
+  background: #eee;
+  color: #555;
+}
+
+.review-form__btn--cancel:hover {
+  background: #ddd;
+}
+
+.review-popover {
+  position: absolute;
+  z-index: 10002;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1rem;
+  width: 260px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  color: #060B2B;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.review-popover__author {
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 0.15rem;
+}
+
+.review-popover__time {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  margin-bottom: 0.6rem;
+}
+
+.review-popover__text {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+
+.review-popover__text--resolved {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.review-popover__resolve {
+  padding: 0.35rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #555;
+  font-family: inherit;
+}
+
+.review-popover__resolve:hover {
+  background: #eee;
+}
+
+.review-toolbar {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-toolbar__btn {
+  padding: 0.55rem 1rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  background: #fff;
+  color: #060B2B;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  white-space: nowrap;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.review-toolbar__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.2);
+}
+
+.review-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 360px;
+  height: 100vh;
+  background: #fff;
+  color: #060B2B;
+  z-index: 10001;
+  box-shadow: -4px 0 32px rgba(0,0,0,0.15);
+  font-family: 'Montserrat', sans-serif;
+  overflow-y: auto;
+  animation: reviewPanelSlideIn 0.3s ease forwards;
+}
+
+.review-panel--closing {
+  animation: reviewPanelSlideOut 0.3s ease forwards;
+}
+
+.review-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.25rem 0.75rem;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+.review-panel__title {
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.review-panel__close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: #999;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.review-panel__close:hover {
+  color: #333;
+}
+
+.review-panel__counts {
+  padding: 0.75rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  border-bottom: 1px solid #eee;
+}
+
+.review-panel__section-label {
+  padding: 0.75rem 1.25rem 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: 700;
+}
+
+.review-panel__item {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.review-panel__item-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.review-panel__item-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.review-panel__item-author {
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.review-panel__item-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 0.4rem;
+}
+
+.review-panel__item-text--resolved {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.review-panel__item-resolve {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  background: #f5f5f5;
+  color: #555;
+  font-family: inherit;
+}
+
+.review-panel__item-resolve:hover {
+  background: #eee;
+}
+
+.review-panel__empty {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #999;
+  line-height: 1.6;
+}
+
+.review-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10003;
+  background: rgba(6,11,43,0.92);
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: reviewToastIn 0.25s ease forwards;
+}
+
+.review-toast--out {
+  animation: reviewToastOut 0.25s ease forwards;
+}
+
+/* Ensure sticky widget is below review UI */
+.sticky-widget {
+  z-index: 900 !important;
+}
 </style>
 </head>
 <body>
@@ -1481,7 +1869,7 @@ ul { list-style: none; }
 </section>
 
 <!-- ============ 5. OPENING KEYNOTE ============ -->
-<section class="keynote curve-divider">
+<section class="keynote curve-divider" id="keynote">
   <div class="container">
     <div class="keynote__content reveal">
       <div class="keynote__eyebrow">Opening Keynote</div>
@@ -1496,7 +1884,7 @@ ul { list-style: none; }
 </section>
 
 <!-- ============ 6. COMMUNITY PHOTO GRID ============ -->
-<section class="community">
+<section class="community" id="community">
   <div class="container">
     <h2 class="community__title reveal">5,000+ Educators. One Mission.</h2>
     <div class="community__grid reveal">
@@ -1955,6 +2343,592 @@ ul { list-style: none; }
       requestAnimationFrame(animateMarquee);
     }
   }
+
+  /* ========================================
+     REVIEW / FEEDBACK SYSTEM
+     ======================================== */
+  if (new URLSearchParams(window.location.search).get('review') === '1') {
+
+    var REVIEW_COLORS = ['#E523FF','#00D0E0','#3BD85E','#FF5C37','#3D6AFF','#FF6C7A','#FFE01B'];
+    var REVIEW_STORAGE_KEY = 'brightpath_review_comments';
+    var REVIEW_AUTHOR_KEY = 'brightpath_review_author';
+    var reviewAuthorColorMap = {};
+    var reviewColorIndex = 0;
+    var reviewPinCounter = 0;
+    var reviewPanelOpen = false;
+    var reviewActivePopover = null;
+    var reviewActiveForm = null;
+
+    /* -- Helpers -- */
+    function reviewGetAuthorColor(author) {
+      if (!reviewAuthorColorMap[author]) {
+        reviewAuthorColorMap[author] = REVIEW_COLORS[reviewColorIndex % REVIEW_COLORS.length];
+        reviewColorIndex++;
+      }
+      return reviewAuthorColorMap[author];
+    }
+
+    function reviewLoadComments() {
+      try {
+        var raw = localStorage.getItem(REVIEW_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch(e) { return []; }
+    }
+
+    function reviewSaveComments(comments) {
+      localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(comments));
+    }
+
+    function reviewGetSavedAuthor() {
+      return localStorage.getItem(REVIEW_AUTHOR_KEY) || '';
+    }
+
+    function reviewSaveAuthor(name) {
+      localStorage.setItem(REVIEW_AUTHOR_KEY, name);
+    }
+
+    function reviewShowToast(msg) {
+      var existing = document.querySelector('.review-toast');
+      if (existing) existing.remove();
+      var t = document.createElement('div');
+      t.className = 'review-toast';
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(function() {
+        t.classList.add('review-toast--out');
+        setTimeout(function() { t.remove(); }, 300);
+      }, 3000);
+    }
+
+    function reviewFindSection(el) {
+      var node = el;
+      while (node && node !== document.body) {
+        if (node.tagName === 'SECTION' || node.tagName === 'FOOTER' || node.tagName === 'NAV') {
+          return node;
+        }
+        node = node.parentElement;
+      }
+      return document.body;
+    }
+
+    function reviewGetSectionId(section) {
+      if (section.id) return section.id;
+      if (section.classList.contains('keynote')) return 'keynote';
+      if (section.classList.contains('community')) return 'community';
+      if (section.classList.contains('stats-bar')) return 'stats-bar';
+      if (section.classList.contains('countdown-section')) return 'register';
+      if (section.classList.contains('why-attend')) return 'why';
+      if (section.classList.contains('tracks')) return 'tracks';
+      if (section.classList.contains('speakers')) return 'speakers';
+      if (section.classList.contains('marquee-section')) return 'marquee';
+      if (section.classList.contains('social-proof')) return 'social-proof';
+      if (section.classList.contains('sponsors')) return 'sponsors';
+      if (section.classList.contains('footer')) return 'footer';
+      return 'body';
+    }
+
+    function reviewFormatTime(iso) {
+      var d = new Date(iso);
+      var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      var h = d.getHours();
+      var ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      var min = String(d.getMinutes()).padStart(2,'0');
+      return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + ' at ' + h + ':' + min + ' ' + ampm;
+    }
+
+    function reviewIsReviewElement(el) {
+      var node = el;
+      while (node && node !== document.body) {
+        if (node.classList) {
+          var classes = node.className || '';
+          if (typeof classes === 'string' && (classes.indexOf('review') !== -1 || classes.indexOf('pin') !== -1)) {
+            return true;
+          }
+        }
+        node = node.parentElement;
+      }
+      return false;
+    }
+
+    function reviewClosePopover() {
+      if (reviewActivePopover) {
+        reviewActivePopover.remove();
+        reviewActivePopover = null;
+      }
+    }
+
+    function reviewCloseForm() {
+      if (reviewActiveForm) {
+        reviewActiveForm.remove();
+        reviewActiveForm = null;
+      }
+    }
+
+    function reviewClosePanel() {
+      var panel = document.querySelector('.review-panel');
+      if (panel) {
+        panel.classList.add('review-panel--closing');
+        setTimeout(function() { panel.remove(); }, 300);
+      }
+      reviewPanelOpen = false;
+    }
+
+    /* -- Nav Badge -- */
+    var navInner = document.querySelector('.nav__inner');
+    if (navInner) {
+      var badge = document.createElement('span');
+      badge.className = 'review-nav-badge';
+      badge.textContent = 'REVIEW MODE';
+      navInner.appendChild(badge);
+    }
+
+    /* -- Render a single pin onto the page -- */
+    function reviewRenderPin(comment, index) {
+      var sectionEl = document.getElementById(comment.sectionId) ||
+                      document.querySelector('.' + comment.sectionId) ||
+                      document.body;
+
+      /* Ensure section is position:relative for absolute pin positioning */
+      var cs = getComputedStyle(sectionEl);
+      if (cs.position === 'static') {
+        sectionEl.style.position = 'relative';
+      }
+
+      var pin = document.createElement('div');
+      pin.className = 'review-pin' + (comment.resolved ? ' review-pin--resolved' : '');
+      pin.setAttribute('data-review-id', comment.id);
+      pin.textContent = index + 1;
+      pin.style.background = reviewGetAuthorColor(comment.author);
+      pin.style.left = (comment.xPercent * 100) + '%';
+      pin.style.top = comment.yOffsetInSection + 'px';
+
+      pin.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        reviewClosePopover();
+        reviewCloseForm();
+        reviewShowPopover(comment, pin);
+      });
+
+      sectionEl.appendChild(pin);
+      return pin;
+    }
+
+    /* -- Show popover on a pin -- */
+    function reviewShowPopover(comment, pinEl) {
+      reviewClosePopover();
+      var pop = document.createElement('div');
+      pop.className = 'review-popover';
+
+      var authorDiv = document.createElement('div');
+      authorDiv.className = 'review-popover__author';
+      authorDiv.style.color = reviewGetAuthorColor(comment.author);
+      authorDiv.textContent = comment.author;
+
+      var timeDiv = document.createElement('div');
+      timeDiv.className = 'review-popover__time';
+      timeDiv.textContent = reviewFormatTime(comment.timestamp);
+
+      var textDiv = document.createElement('div');
+      textDiv.className = 'review-popover__text' + (comment.resolved ? ' review-popover__text--resolved' : '');
+      textDiv.textContent = comment.text;
+
+      var resolveBtn = document.createElement('button');
+      resolveBtn.className = 'review-popover__resolve';
+      resolveBtn.textContent = comment.resolved ? 'Resolved' : 'Resolve';
+
+      resolveBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var comments = reviewLoadComments();
+        for (var i = 0; i < comments.length; i++) {
+          if (comments[i].id === comment.id) {
+            comments[i].resolved = true;
+            comment.resolved = true;
+            break;
+          }
+        }
+        reviewSaveComments(comments);
+        var existingPin = document.querySelector('[data-review-id="' + comment.id + '"]');
+        if (existingPin) existingPin.classList.add('review-pin--resolved');
+        textDiv.classList.add('review-popover__text--resolved');
+        resolveBtn.textContent = 'Resolved';
+        reviewShowToast('Comment resolved');
+      });
+
+      pop.appendChild(authorDiv);
+      pop.appendChild(timeDiv);
+      pop.appendChild(textDiv);
+      pop.appendChild(resolveBtn);
+
+      pop.addEventListener('click', function(e) { e.stopPropagation(); });
+
+      /* Position next to pin */
+      var pinRect = pinEl.getBoundingClientRect();
+      var section = pinEl.parentElement;
+      var sectionRect = section.getBoundingClientRect();
+      pop.style.left = (pinRect.left - sectionRect.left + 36) + 'px';
+      pop.style.top = (pinRect.top - sectionRect.top - 10) + 'px';
+
+      section.appendChild(pop);
+      reviewActivePopover = pop;
+    }
+
+    /* -- Render all pins -- */
+    function reviewRenderAllPins() {
+      /* Remove existing pins and popovers */
+      document.querySelectorAll('.review-pin, .review-popover, .review-form').forEach(function(el) {
+        el.remove();
+      });
+      reviewActivePopover = null;
+      reviewActiveForm = null;
+
+      var comments = reviewLoadComments();
+      reviewPinCounter = comments.length;
+
+      /* Build author color map in order */
+      var authorOrder = [];
+      comments.forEach(function(c) {
+        if (authorOrder.indexOf(c.author) === -1) authorOrder.push(c.author);
+      });
+      reviewAuthorColorMap = {};
+      reviewColorIndex = 0;
+      authorOrder.forEach(function(a) { reviewGetAuthorColor(a); });
+
+      comments.forEach(function(c, i) {
+        reviewRenderPin(c, i);
+      });
+    }
+
+    /* -- Show comment form at click position -- */
+    function reviewShowForm(section, xPercent, yOffset) {
+      reviewCloseForm();
+      reviewClosePopover();
+
+      var form = document.createElement('div');
+      form.className = 'review-form';
+      form.style.left = (xPercent * 100) + '%';
+      form.style.top = yOffset + 'px';
+      form.addEventListener('click', function(e) { e.stopPropagation(); });
+
+      var authorInput = document.createElement('input');
+      authorInput.type = 'text';
+      authorInput.placeholder = 'Your name';
+      authorInput.value = reviewGetSavedAuthor();
+
+      var textArea = document.createElement('textarea');
+      textArea.placeholder = 'Leave a comment...';
+
+      var btns = document.createElement('div');
+      btns.className = 'review-form__buttons';
+
+      var submitBtn = document.createElement('button');
+      submitBtn.className = 'review-form__btn review-form__btn--submit';
+      submitBtn.textContent = 'Submit';
+      submitBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var author = authorInput.value.trim();
+        var text = textArea.value.trim();
+        if (!author || !text) return;
+
+        reviewSaveAuthor(author);
+
+        var sectionId = reviewGetSectionId(section);
+        var comment = {
+          id: 'pin-' + Date.now(),
+          author: author,
+          text: text,
+          timestamp: new Date().toISOString(),
+          sectionId: sectionId,
+          xPercent: xPercent,
+          yOffsetInSection: yOffset,
+          viewportWidth: window.innerWidth,
+          resolved: false
+        };
+
+        var comments = reviewLoadComments();
+        comments.push(comment);
+        reviewSaveComments(comments);
+        reviewRenderAllPins();
+        reviewShowToast('Comment saved');
+      });
+
+      var cancelBtn = document.createElement('button');
+      cancelBtn.className = 'review-form__btn review-form__btn--cancel';
+      cancelBtn.textContent = 'Cancel';
+      cancelBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        reviewCloseForm();
+      });
+
+      btns.appendChild(submitBtn);
+      btns.appendChild(cancelBtn);
+      form.appendChild(authorInput);
+      form.appendChild(textArea);
+      form.appendChild(btns);
+
+      var cs = getComputedStyle(section);
+      if (cs.position === 'static') section.style.position = 'relative';
+      section.appendChild(form);
+      reviewActiveForm = form;
+      textArea.focus();
+    }
+
+    /* -- Page click handler (drop pins) -- */
+    document.addEventListener('click', function(e) {
+      /* Ignore clicks on review UI */
+      if (reviewIsReviewElement(e.target)) return;
+
+      /* Close open popovers/forms on outside click */
+      if (reviewActivePopover || reviewActiveForm) {
+        reviewClosePopover();
+        reviewCloseForm();
+        return;
+      }
+
+      /* Close panel on outside click */
+      if (reviewPanelOpen) return;
+
+      var section = reviewFindSection(e.target);
+      if (section === document.body) return;
+
+      var sectionRect = section.getBoundingClientRect();
+      var xPercent = (e.clientX - sectionRect.left) / sectionRect.width;
+      var yOffset = e.clientY - sectionRect.top + section.scrollTop;
+
+      /* Account for page scroll offset within the section */
+      var scrolledTop = window.pageYOffset || document.documentElement.scrollTop;
+      yOffset = e.pageY - (sectionRect.top + scrolledTop);
+
+      /* Clamp */
+      xPercent = Math.max(0.02, Math.min(0.95, xPercent));
+      yOffset = Math.max(10, yOffset);
+
+      reviewShowForm(section, xPercent, yOffset);
+    });
+
+    /* -- Build feedback panel -- */
+    function reviewBuildPanel() {
+      var existing = document.querySelector('.review-panel');
+      if (existing) {
+        reviewClosePanel();
+        return;
+      }
+
+      reviewPanelOpen = true;
+      var comments = reviewLoadComments();
+
+      var panel = document.createElement('div');
+      panel.className = 'review-panel';
+      panel.addEventListener('click', function(e) { e.stopPropagation(); e.preventDefault(); });
+
+      /* Header */
+      var header = document.createElement('div');
+      header.className = 'review-panel__header';
+      var title = document.createElement('div');
+      title.className = 'review-panel__title';
+      title.textContent = 'All Feedback';
+      var closeBtn2 = document.createElement('button');
+      closeBtn2.className = 'review-panel__close';
+      closeBtn2.innerHTML = '&times;';
+      closeBtn2.addEventListener('click', function(e) { e.stopPropagation(); e.preventDefault(); reviewClosePanel(); });
+      header.appendChild(title);
+      header.appendChild(closeBtn2);
+      panel.appendChild(header);
+
+      /* Counts */
+      var openCount = comments.filter(function(c) { return !c.resolved; }).length;
+      var resolvedCount = comments.filter(function(c) { return c.resolved; }).length;
+      var counts = document.createElement('div');
+      counts.className = 'review-panel__counts';
+      counts.textContent = openCount + ' OPEN, ' + resolvedCount + ' RESOLVED';
+      panel.appendChild(counts);
+
+      if (comments.length === 0) {
+        var empty = document.createElement('div');
+        empty.className = 'review-panel__empty';
+        empty.textContent = 'No feedback yet. Click anywhere on the page to leave a comment.';
+        panel.appendChild(empty);
+      } else {
+        /* Group by section */
+        var sections = {};
+        comments.forEach(function(c) {
+          if (!sections[c.sectionId]) sections[c.sectionId] = [];
+          sections[c.sectionId].push(c);
+        });
+
+        Object.keys(sections).forEach(function(sid) {
+          var label = document.createElement('div');
+          label.className = 'review-panel__section-label';
+          label.textContent = sid.replace(/-/g, ' ');
+          panel.appendChild(label);
+
+          sections[sid].forEach(function(c) {
+            var item = document.createElement('div');
+            item.className = 'review-panel__item';
+
+            var itemHeader = document.createElement('div');
+            itemHeader.className = 'review-panel__item-header';
+
+            var dot = document.createElement('div');
+            dot.className = 'review-panel__item-dot';
+            dot.style.background = reviewGetAuthorColor(c.author);
+
+            var authorName = document.createElement('div');
+            authorName.className = 'review-panel__item-author';
+            authorName.textContent = c.author;
+
+            itemHeader.appendChild(dot);
+            itemHeader.appendChild(authorName);
+
+            var text = document.createElement('div');
+            text.className = 'review-panel__item-text' + (c.resolved ? ' review-panel__item-text--resolved' : '');
+            text.textContent = c.text;
+
+            item.appendChild(itemHeader);
+            item.appendChild(text);
+
+            if (!c.resolved) {
+              var rBtn = document.createElement('button');
+              rBtn.className = 'review-panel__item-resolve';
+              rBtn.textContent = 'Resolve';
+              rBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                var allComments = reviewLoadComments();
+                for (var j = 0; j < allComments.length; j++) {
+                  if (allComments[j].id === c.id) {
+                    allComments[j].resolved = true;
+                    c.resolved = true;
+                    break;
+                  }
+                }
+                reviewSaveComments(allComments);
+                reviewRenderAllPins();
+                text.classList.add('review-panel__item-text--resolved');
+                rBtn.remove();
+                /* Update counts */
+                var oc = allComments.filter(function(x) { return !x.resolved; }).length;
+                var rc = allComments.filter(function(x) { return x.resolved; }).length;
+                counts.textContent = oc + ' OPEN, ' + rc + ' RESOLVED';
+                reviewShowToast('Comment resolved');
+              });
+              item.appendChild(rBtn);
+            }
+
+            panel.appendChild(item);
+          });
+        });
+      }
+
+      document.body.appendChild(panel);
+    }
+
+    /* -- Toolbar -- */
+    var toolbar = document.createElement('div');
+    toolbar.className = 'review-toolbar';
+
+    var btnViewAll = document.createElement('button');
+    btnViewAll.className = 'review-toolbar__btn';
+    btnViewAll.textContent = 'View All Feedback';
+    btnViewAll.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      reviewClosePopover();
+      reviewCloseForm();
+      reviewBuildPanel();
+    });
+
+    var btnCheck = document.createElement('button');
+    btnCheck.className = 'review-toolbar__btn';
+    btnCheck.textContent = 'Check for New Feedback';
+    btnCheck.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var comments = reviewLoadComments();
+      if (comments.length > 0) {
+        reviewRenderAllPins();
+        reviewShowToast(comments.length + ' comments loaded');
+      } else {
+        reviewShowToast('No new feedback yet');
+      }
+    });
+
+    var btnExit = document.createElement('button');
+    btnExit.className = 'review-toolbar__btn';
+    btnExit.textContent = 'Exit Review';
+    btnExit.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      var url = new URL(window.location.href);
+      url.searchParams.delete('review');
+      window.location.href = url.toString();
+    });
+
+    toolbar.appendChild(btnViewAll);
+    toolbar.appendChild(btnCheck);
+    toolbar.appendChild(btnExit);
+    document.body.appendChild(toolbar);
+
+    /* -- Pre-seed demo comments if empty -- */
+    var existingComments = reviewLoadComments();
+    if (existingComments.length === 0) {
+      var demoComments = [
+        {
+          id: 'pin-demo-1',
+          author: 'Sarah Chen',
+          text: 'Love the gradient energy here!',
+          timestamp: '2026-03-22T10:15:00.000Z',
+          sectionId: 'hero',
+          xPercent: 0.35,
+          yOffsetInSection: 280,
+          viewportWidth: 1440,
+          resolved: false
+        },
+        {
+          id: 'pin-demo-2',
+          author: 'Marcus Rivera',
+          text: 'The session cards look great',
+          timestamp: '2026-03-22T11:30:00.000Z',
+          sectionId: 'tracks',
+          xPercent: 0.55,
+          yOffsetInSection: 200,
+          viewportWidth: 1440,
+          resolved: false
+        },
+        {
+          id: 'pin-demo-3',
+          author: 'Priya Patel',
+          text: 'Can we try a different headline?',
+          timestamp: '2026-03-22T14:45:00.000Z',
+          sectionId: 'keynote',
+          xPercent: 0.25,
+          yOffsetInSection: 180,
+          viewportWidth: 1440,
+          resolved: false
+        },
+        {
+          id: 'pin-demo-4',
+          author: 'Sarah Chen',
+          text: 'These photos are perfect!',
+          timestamp: '2026-03-23T09:00:00.000Z',
+          sectionId: 'community',
+          xPercent: 0.65,
+          yOffsetInSection: 150,
+          viewportWidth: 1440,
+          resolved: false
+        }
+      ];
+      reviewSaveComments(demoComments);
+    }
+
+    /* -- Initial render -- */
+    reviewRenderAllPins();
+
+  } /* end review mode */
 
 })();
 </script>
