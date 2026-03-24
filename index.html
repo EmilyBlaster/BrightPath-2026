@@ -1679,14 +1679,10 @@ ul { list-style: none; }
         <path id="marqueeArc" d="M -200,80 Q 900,580 2000,80" fill="none"/>
       </defs>
       <text>
-        <textPath href="#marqueeArc">Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.   Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.
-          <animate attributeName="startOffset" from="0%" to="100%" dur="30s" repeatCount="indefinite"/>
-        </textPath>
+        <textPath id="marqueeText1" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
       </text>
       <text>
-        <textPath href="#marqueeArc">Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.   Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.
-          <animate attributeName="startOffset" from="-100%" to="0%" dur="30s" repeatCount="indefinite"/>
-        </textPath>
+        <textPath id="marqueeText2" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
       </text>
     </svg>
   </div>
@@ -1935,9 +1931,28 @@ ul { list-style: none; }
     widgetDismissed = true;
   });
 
-  /* ---- CURVED TEXT MARQUEE (reduced motion) ---- */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('.marquee-arc animate').forEach(a => a.remove());
+  /* ---- CURVED TEXT MARQUEE ---- */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const tp1 = document.getElementById('marqueeText1');
+    const tp2 = document.getElementById('marqueeText2');
+    if (tp1 && tp2) {
+      const arcPath = document.getElementById('marqueeArc');
+      const pathLen = arcPath.getTotalLength();
+      const textLen = tp1.getComputedTextLength();
+      let offset = 0;
+      const speed = 0.8;
+
+      tp2.setAttribute('startOffset', -textLen);
+
+      function animateMarquee() {
+        offset += speed;
+        if (offset >= textLen) offset -= textLen;
+        tp1.setAttribute('startOffset', offset);
+        tp2.setAttribute('startOffset', offset - textLen);
+        requestAnimationFrame(animateMarquee);
+      }
+      requestAnimationFrame(animateMarquee);
+    }
   }
 
 })();
