@@ -928,7 +928,7 @@ ul { list-style: none; }
    ======================================== */
 .marquee-section {
   background: linear-gradient(180deg, #DCE8F8 0%, #E8EEF8 30%, var(--cream) 100%);
-  padding: 4rem 0 0;
+  padding: 0;
   overflow: hidden;
   position: relative;
 }
@@ -936,15 +936,13 @@ ul { list-style: none; }
 .marquee-arc {
   position: relative;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .marquee-arc svg {
   width: 100%;
   height: auto;
-  overflow: visible;
   display: block;
+  overflow: visible;
 }
 
 .marquee-arc text {
@@ -958,15 +956,15 @@ ul { list-style: none; }
 .marquee__icon {
   position: relative;
   z-index: 2;
-  display: flex;
-  justify-content: center;
-  margin: -6vw auto 0;
-  padding-bottom: 2rem;
+  width: clamp(140px, 18vw, 280px);
+  margin: clamp(-200px, -15vw, -100px) auto 0;
 }
 
+.marquee__icon img,
 .marquee__icon svg {
-  width: clamp(120px, 16vw, 220px);
+  width: 100%;
   height: auto;
+  display: block;
 }
 
 @keyframes coinSpin {
@@ -1288,7 +1286,7 @@ ul { list-style: none; }
   .sticky-widget { right: 1rem; bottom: 1rem; width: 260px; }
 
   .marquee-arc text { font-size: 80px; }
-  .marquee__icon { margin-top: -16vw; }
+  .marquee__icon { margin-top: -12vw; }
 }
 
 /* ========================================
@@ -1643,32 +1641,23 @@ ul { list-style: none; }
 <!-- ============ 10. CURVED TEXT MARQUEE ============ -->
 <section class="marquee-section">
   <div class="marquee-arc" aria-hidden="true">
-    <svg viewBox="0 160 1694 514" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 1694 674" preserveAspectRatio="xMidYMid meet">
       <defs>
         <path id="marqueeArc" d="M -847,643 Q 847,-329 2541,643" fill="none"/>
       </defs>
       <text>
-        <textPath id="marqueeTextPath" href="#marqueeArc" startOffset="-200">
-          Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.&#x2003;&#x2003;Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.
-        </textPath>
+        <textPath id="marqueeTextPath" href="#marqueeArc" startOffset="-200">Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.&#x2003;&#x2003;Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.</textPath>
       </text>
     </svg>
   </div>
 
-  <!-- Decorative sparkle/star icon -->
+  <!-- Decorative sparkle -->
   <div class="marquee__icon">
     <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- 4-point sparkle star -->
-      <path d="M100 20 C104 70, 130 96, 180 100 C130 104, 104 130, 100 180 C96 130, 70 104, 20 100 C70 96, 96 70, 100 20Z" fill="url(#sparkleGrad)" opacity="0.7"/>
-      <!-- Inner smaller sparkle rotated -->
-      <g transform="translate(100,100) rotate(45) translate(-100,-100)">
-        <path d="M100 55 C102 80, 120 98, 145 100 C120 102, 102 120, 100 145 C98 120, 80 102, 55 100 C80 98, 98 80, 100 55Z" fill="url(#sparkleGrad)" opacity="0.35"/>
-      </g>
-      <!-- Center dot -->
-      <circle cx="100" cy="100" r="6" fill="white" opacity="0.8"/>
-      <defs>
-        <linearGradient id="sparkleGrad" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#E523FF"/></linearGradient>
-      </defs>
+      <path d="M100 10 C105 75,125 95,190 100 C125 105,105 125,100 190 C95 125,75 105,10 100 C75 95,95 75,100 10Z" fill="url(#mkGrad)" opacity="0.65"/>
+      <g transform="rotate(45 100 100)"><path d="M100 45 C103 82,118 97,155 100 C118 103,103 118,100 155 C97 118,82 103,45 100 C82 97,97 82,100 45Z" fill="url(#mkGrad)" opacity="0.3"/></g>
+      <circle cx="100" cy="100" r="5" fill="white" opacity="0.9"/>
+      <defs><linearGradient id="mkGrad" x1="10" y1="10" x2="190" y2="190" gradientUnits="userSpaceOnUse"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#00D0E0"/></linearGradient></defs>
     </svg>
   </div>
 </section>
