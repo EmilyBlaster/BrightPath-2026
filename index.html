@@ -929,6 +929,7 @@ ul { list-style: none; }
 .marquee-section {
   background: linear-gradient(180deg, #E8E4DD 0%, #F5F3EE 100%);
   padding: 0;
+  margin: 0;
   overflow: hidden;
   position: relative;
 }
@@ -936,12 +937,17 @@ ul { list-style: none; }
 .marquee-arc {
   position: relative;
   width: 100%;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
 }
 
 .marquee-arc svg {
   width: 100%;
   height: auto;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .marquee-arc text {
@@ -958,8 +964,8 @@ ul { list-style: none; }
   z-index: 2;
   display: flex;
   justify-content: center;
-  margin-top: -3rem;
-  padding-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 1rem;
 }
 
 .marquee__icon svg {
@@ -1674,9 +1680,9 @@ ul { list-style: none; }
 
   <!-- Curved arc with scrolling text -->
   <div class="marquee-arc" aria-hidden="true">
-    <svg viewBox="0 40 1800 560" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="-100 30 2000 340" preserveAspectRatio="xMidYMid slice">
       <defs>
-        <path id="marqueeArc" d="M -200,80 Q 900,580 2000,80" fill="none"/>
+        <path id="marqueeArc" d="M -200,60 Q 900,360 2000,60" fill="none"/>
       </defs>
       <text>
         <textPath id="marqueeText1" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
