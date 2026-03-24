@@ -797,7 +797,8 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 4px 24px rgba(6,11,43,0.06);
+  border: none;
+  box-shadow: none;
 }
 
 .tracks__card:nth-child(1) { background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 40%, #fce7f3 100%); }
@@ -807,22 +808,10 @@ ul { list-style: none; }
 
 .tracks__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(6,11,43,0.1);
+  box-shadow: 0 12px 40px rgba(6,11,43,0.08);
 }
 
-.tracks__card-accent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  border-radius: var(--card-radius) var(--card-radius) 0 0;
-}
-
-.tracks__card:nth-child(1) .tracks__card-accent { background: var(--superblue); }
-.tracks__card:nth-child(2) .tracks__card-accent { background: var(--tomato); }
-.tracks__card:nth-child(3) .tracks__card-accent { background: var(--tomato); }
-.tracks__card:nth-child(4) .tracks__card-accent { background: var(--kiwi); }
+.tracks__card-accent { display: none; }
 
 .tracks__card-eyebrow {
   font-family: 'DM Mono', monospace;
