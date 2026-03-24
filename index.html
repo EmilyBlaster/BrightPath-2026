@@ -1558,12 +1558,15 @@ ul { list-style: none; }
   border: none;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  background: #fff;
-  color: #060B2B;
+  color: #fff;
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
   white-space: nowrap;
   transition: transform 0.15s, box-shadow 0.15s;
 }
+
+.review-toolbar__btn--view { background: #3D6AFF; }
+.review-toolbar__btn--check { background: #060B2B; }
+.review-toolbar__btn--exit { background: #E523FF; }
 
 .review-toolbar__btn:hover {
   transform: translateY(-2px);
@@ -2181,7 +2184,7 @@ ul { list-style: none; }
         <a href="#">Contact Us</a>
       </div>
     </div>
-    <div class="footer__bottom">2026 BrightPath. All rights reserved. This is a portfolio project.</div>
+    <div class="footer__bottom">2026 BrightPath. All rights reserved. This is a portfolio project. <a href="?review=1" style="opacity:0.4;color:var(--agave);text-decoration:none;margin-left:1rem;font-size:0.7rem;">Enter Review Mode</a></div>
   </div>
 </footer>
 
@@ -2832,7 +2835,7 @@ ul { list-style: none; }
     toolbar.className = 'review-toolbar';
 
     var btnViewAll = document.createElement('button');
-    btnViewAll.className = 'review-toolbar__btn';
+    btnViewAll.className = 'review-toolbar__btn review-toolbar__btn--view';
     btnViewAll.textContent = 'View All Feedback';
     btnViewAll.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -2843,7 +2846,7 @@ ul { list-style: none; }
     });
 
     var btnCheck = document.createElement('button');
-    btnCheck.className = 'review-toolbar__btn';
+    btnCheck.className = 'review-toolbar__btn review-toolbar__btn--check';
     btnCheck.textContent = 'Check for New Feedback';
     btnCheck.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -2858,8 +2861,8 @@ ul { list-style: none; }
     });
 
     var btnExit = document.createElement('button');
-    btnExit.className = 'review-toolbar__btn';
-    btnExit.textContent = 'Exit Review';
+    btnExit.className = 'review-toolbar__btn review-toolbar__btn--exit';
+    btnExit.textContent = '× Exit Review';
     btnExit.addEventListener('click', function(e) {
       e.stopPropagation();
       e.preventDefault();
