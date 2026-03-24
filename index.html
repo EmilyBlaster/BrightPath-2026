@@ -927,7 +927,7 @@ ul { list-style: none; }
    10. CURVED TEXT MARQUEE
    ======================================== */
 .marquee-section {
-  background: linear-gradient(180deg, #DCE8F8 0%, #E8EEF8 30%, var(--cream) 100%);
+  background: linear-gradient(180deg, #E8E4DD 0%, #F5F3EE 100%);
   padding: 0;
   overflow: hidden;
   position: relative;
@@ -942,34 +942,35 @@ ul { list-style: none; }
   width: 100%;
   height: auto;
   display: block;
-  overflow: visible;
 }
 
 .marquee-arc text {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  font-size: 140px;
+  font-size: 82px;
   fill: var(--superblue);
+  opacity: 0.3;
   letter-spacing: -0.02em;
 }
 
 .marquee__icon {
   position: relative;
   z-index: 2;
-  width: clamp(180px, 22vw, 340px);
-  margin: -288px auto 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: -3rem;
+  padding-bottom: 0;
 }
 
 .marquee__icon svg {
-  width: 100%;
+  width: clamp(180px, 18vw, 250px);
   height: auto;
-  display: block;
+  animation: iconFloat 6s ease-in-out infinite;
 }
 
-@keyframes coinSpin {
-  0%, 100% { transform: rotateY(0deg); }
-  50% { transform: rotateY(180deg); }
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
 
 /* Diamond decorations */
@@ -977,15 +978,32 @@ ul { list-style: none; }
   position: absolute;
   width: 40px;
   height: 40px;
-  animation: diamondFloat 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.diamond--tl { top: 2rem; left: 3rem; transform: rotate(15deg); }
-.diamond--br { bottom: 2rem; right: 3rem; transform: rotate(-20deg); animation-delay: -2.5s; }
+.diamond--tl {
+  top: 2rem;
+  left: 3rem;
+  transform: rotate(-20deg);
+  animation: diamondFloat1 12s ease-in-out infinite;
+}
 
-@keyframes diamondFloat {
-  0%, 100% { transform: translateY(0) rotate(15deg); }
-  50% { transform: translateY(-12px) rotate(20deg); }
+.diamond--br {
+  bottom: 4rem;
+  right: 3rem;
+  transform: rotate(20deg);
+  animation: diamondFloat2 15s ease-in-out infinite;
+}
+
+@keyframes diamondFloat1 {
+  0%, 100% { transform: translateY(0) rotate(-20deg); }
+  50% { transform: translateY(-18px) rotate(-15deg); }
+}
+
+@keyframes diamondFloat2 {
+  0%, 100% { transform: translateY(0) rotate(20deg); }
+  50% { transform: translateY(-14px) rotate(25deg); }
 }
 
 /* ========================================
@@ -1285,8 +1303,8 @@ ul { list-style: none; }
 
   .sticky-widget { right: 1rem; bottom: 1rem; width: 260px; }
 
-  .marquee-arc text { font-size: 80px; }
-  .marquee__icon { margin-top: -140px; }
+  .marquee-arc text { font-size: 48px; }
+  .marquee__icon { margin-top: -2rem; }
 }
 
 /* ========================================
@@ -1294,8 +1312,11 @@ ul { list-style: none; }
    ======================================== */
 @media (prefers-reduced-motion: reduce) {
   .blob, .blob-b1, .blob-b2, .blob-b3, .blob-b4, .blob-b5, .blob-b6,
-  .hero__icon, .marquee__icon svg {
+  .hero__icon, .marquee__icon svg, .diamond {
     animation: none !important;
+  }
+  .marquee-arc animate {
+    display: none;
   }
   .reveal {
     opacity: 1 !important;
@@ -1640,51 +1661,62 @@ ul { list-style: none; }
 
 <!-- ============ 10. CURVED TEXT MARQUEE ============ -->
 <section class="marquee-section">
+  <!-- Diamond decoration — top-left -->
+  <svg class="diamond diamond--tl" viewBox="0 0 40 40" fill="none">
+    <path d="M20 0L40 20L20 40L0 20Z" fill="url(#dGradTL)"/>
+    <defs><linearGradient id="dGradTL" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#E523FF" stop-opacity="0.4"/><stop offset="1" stop-color="#3D6AFF" stop-opacity="0.2"/></linearGradient></defs>
+  </svg>
+  <!-- Diamond decoration — bottom-right -->
+  <svg class="diamond diamond--br" viewBox="0 0 40 40" fill="none">
+    <path d="M20 0L40 20L20 40L0 20Z" fill="url(#dGradBR)"/>
+    <defs><linearGradient id="dGradBR" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#3BD85E" stop-opacity="0.4"/><stop offset="1" stop-color="#00D0E0" stop-opacity="0.2"/></linearGradient></defs>
+  </svg>
+
+  <!-- Curved arc with scrolling text -->
   <div class="marquee-arc" aria-hidden="true">
-    <svg viewBox="0 0 1694 674" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 1800 674" preserveAspectRatio="xMidYMid meet">
       <defs>
-        <path id="marqueeArc" d="M -847,643 Q 847,-329 2541,643" fill="none"/>
+        <path id="marqueeArc" d="M -200,80 Q 900,580 2000,80" fill="none"/>
       </defs>
       <text>
-        <textPath id="marqueeTextPath" href="#marqueeArc" startOffset="-200">Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.&#x2003;&#x2003;Invest In Your Classroom.&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;Spend Your Time Teaching Students To Think.&#x2003;&#x2003;Free For All Educators.</textPath>
+        <textPath href="#marqueeArc">Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.   Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.
+          <animate attributeName="startOffset" from="0%" to="100%" dur="30s" repeatCount="indefinite"/>
+        </textPath>
+      </text>
+      <text>
+        <textPath href="#marqueeArc">Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.   Empower Your Classroom With AI.   Transform How Students Learn.   Invest In The Future Of Education.
+          <animate attributeName="startOffset" from="-100%" to="0%" dur="30s" repeatCount="indefinite"/>
+        </textPath>
       </text>
     </svg>
   </div>
 
-  <!-- Decorative stacked discs icon (mirrors VEC coins) -->
+  <!-- Centered decorative icon below arc -->
   <div class="marquee__icon">
-    <svg viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Shadow/glow -->
-      <ellipse cx="170" cy="280" rx="100" ry="18" fill="#3D6AFF" opacity="0.08"/>
-      <!-- Bottom disc -->
-      <g transform="translate(50, 160)">
-        <ellipse cx="120" cy="90" rx="110" ry="30" fill="#2952CC"/>
-        <rect x="10" y="60" width="220" height="30" fill="url(#discGrad1)"/>
-        <ellipse cx="120" cy="60" rx="110" ry="30" fill="url(#discGrad1)"/>
-        <ellipse cx="120" cy="60" rx="90" ry="22" fill="#4A7AFF" opacity="0.3"/>
-      </g>
-      <!-- Middle disc -->
-      <g transform="translate(60, 110)">
-        <ellipse cx="110" cy="80" rx="100" ry="28" fill="#2952CC"/>
-        <rect x="10" y="52" width="200" height="28" fill="url(#discGrad2)"/>
-        <ellipse cx="110" cy="52" rx="100" ry="28" fill="url(#discGrad2)"/>
-        <ellipse cx="110" cy="52" rx="80" ry="20" fill="#7BA3FF" opacity="0.3"/>
-      </g>
-      <!-- Top disc -->
-      <g transform="translate(65, 55)">
-        <ellipse cx="105" cy="75" rx="95" ry="26" fill="#2952CC"/>
-        <rect x="10" y="50" width="190" height="25" fill="url(#discGrad3)"/>
-        <ellipse cx="105" cy="50" rx="95" ry="26" fill="url(#discGrad3)"/>
-        <ellipse cx="105" cy="50" rx="75" ry="18" fill="#A8C4FF" opacity="0.35"/>
-        <!-- AI sparkle on top -->
-        <path d="M105 30 L109 42 L121 46 L109 50 L105 62 L101 50 L89 46 L101 42Z" fill="white" opacity="0.7"/>
-        <path d="M140 25 L142 31 L148 33 L142 35 L140 41 L138 35 L132 33 L138 31Z" fill="#00D0E0" opacity="0.6"/>
-        <path d="M72 35 L74 40 L79 42 L74 44 L72 49 L70 44 L65 42 L70 40Z" fill="#E523FF" opacity="0.5"/>
-      </g>
+    <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer glow -->
+      <circle cx="120" cy="120" r="110" fill="url(#iconGlow)" opacity="0.08"/>
+      <!-- Main circle -->
+      <circle cx="120" cy="120" r="85" fill="url(#iconGrad)" opacity="0.15"/>
+      <circle cx="120" cy="120" r="85" stroke="url(#iconGrad)" stroke-width="2.5" fill="none" opacity="0.25"/>
+      <!-- AI chip / brain motif -->
+      <rect x="82" y="82" width="76" height="76" rx="16" fill="url(#iconGrad)" opacity="0.55"/>
+      <rect x="92" y="92" width="56" height="56" rx="10" stroke="white" stroke-width="2" fill="none" opacity="0.35"/>
+      <!-- Circuit traces -->
+      <line x1="120" y1="82" x2="120" y2="62" stroke="var(--superblue)" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+      <line x1="120" y1="158" x2="120" y2="178" stroke="var(--superblue)" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+      <line x1="82" y1="120" x2="62" y2="120" stroke="var(--superblue)" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+      <line x1="158" y1="120" x2="178" y2="120" stroke="var(--superblue)" stroke-width="2.5" opacity="0.3" stroke-linecap="round"/>
+      <!-- Corner traces -->
+      <circle cx="120" cy="62" r="3" fill="var(--superblue)" opacity="0.3"/>
+      <circle cx="120" cy="178" r="3" fill="var(--superblue)" opacity="0.3"/>
+      <circle cx="62" cy="120" r="3" fill="var(--superblue)" opacity="0.3"/>
+      <circle cx="178" cy="120" r="3" fill="var(--superblue)" opacity="0.3"/>
+      <!-- Center sparkle -->
+      <path d="M120 100 L124 114 L138 118 L124 122 L120 136 L116 122 L102 118 L116 114Z" fill="white" opacity="0.7"/>
       <defs>
-        <linearGradient id="discGrad1" x1="0" y1="0" x2="240" y2="0"><stop stop-color="#3D6AFF"/><stop offset="0.5" stop-color="#5B8AFF"/><stop offset="1" stop-color="#3D6AFF"/></linearGradient>
-        <linearGradient id="discGrad2" x1="0" y1="0" x2="220" y2="0"><stop stop-color="#4A7AFF"/><stop offset="0.5" stop-color="#6E9AFF"/><stop offset="1" stop-color="#4A7AFF"/></linearGradient>
-        <linearGradient id="discGrad3" x1="0" y1="0" x2="210" y2="0"><stop stop-color="#5B8AFF"/><stop offset="0.5" stop-color="#8AB4FF"/><stop offset="1" stop-color="#5B8AFF"/></linearGradient>
+        <linearGradient id="iconGrad" x1="60" y1="60" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#00D0E0"/></linearGradient>
+        <radialGradient id="iconGlow" cx="50%" cy="50%" r="50%"><stop stop-color="#3D6AFF" stop-opacity="0.2"/><stop offset="1" stop-color="transparent"/></radialGradient>
       </defs>
     </svg>
   </div>
@@ -1903,24 +1935,9 @@ ul { list-style: none; }
     widgetDismissed = true;
   });
 
-  /* ---- CURVED TEXT MARQUEE ---- */
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (!reducedMotion) {
-    let arcOffset = -200;
-    const arcSpeed = 0.6;
-    const arcReset = 3200;
-
-    function animateMarquee() {
-      arcOffset += arcSpeed;
-      if (arcOffset > arcReset) arcOffset = -200;
-
-      const tp = document.getElementById('marqueeTextPath');
-      if (tp) tp.setAttribute('startOffset', arcOffset);
-
-      requestAnimationFrame(animateMarquee);
-    }
-    requestAnimationFrame(animateMarquee);
+  /* ---- CURVED TEXT MARQUEE (reduced motion) ---- */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.marquee-arc animate').forEach(a => a.remove());
   }
 
 })();
