@@ -1674,15 +1674,15 @@ ul { list-style: none; }
 
   <!-- Curved arc with scrolling text -->
   <div class="marquee-arc" aria-hidden="true">
-    <svg viewBox="0 0 1800 674" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 40 1800 560" preserveAspectRatio="xMidYMid meet">
       <defs>
         <path id="marqueeArc" d="M -200,80 Q 900,580 2000,80" fill="none"/>
       </defs>
       <text>
-        <textPath id="marqueeText1" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
+        <textPath id="marqueeText1" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
       </text>
       <text>
-        <textPath id="marqueeText2" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
+        <textPath id="marqueeText2" href="#marqueeArc" startOffset="0">Empower Your Classroom With AI.&#x2003;&#x2003;&#x2003;Transform How Students Learn.&#x2003;&#x2003;&#x2003;Invest In The Future Of Education.&#x2003;&#x2003;&#x2003;</textPath>
       </text>
     </svg>
   </div>
@@ -1936,19 +1936,16 @@ ul { list-style: none; }
     const tp1 = document.getElementById('marqueeText1');
     const tp2 = document.getElementById('marqueeText2');
     if (tp1 && tp2) {
-      const arcPath = document.getElementById('marqueeArc');
-      const pathLen = arcPath.getTotalLength();
+      /* Measure one copy of the text in path-length pixels */
       const textLen = tp1.getComputedTextLength();
       let offset = 0;
-      const speed = 0.8;
-
-      tp2.setAttribute('startOffset', -textLen);
 
       function animateMarquee() {
-        offset += speed;
-        if (offset >= textLen) offset -= textLen;
+        offset -= 0.5;                       /* scroll rightward along the bowl */
+        if (offset <= -textLen) offset += textLen; /* seamless wrap */
+
         tp1.setAttribute('startOffset', offset);
-        tp2.setAttribute('startOffset', offset - textLen);
+        tp2.setAttribute('startOffset', offset + textLen);
         requestAnimationFrame(animateMarquee);
       }
       requestAnimationFrame(animateMarquee);
