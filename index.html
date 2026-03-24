@@ -792,14 +792,18 @@ ul { list-style: none; }
 }
 
 .tracks__card {
-  background: #fff;
   border-radius: var(--card-radius);
-  padding: 2rem;
-  box-shadow: 0 4px 24px rgba(6,11,43,0.06);
+  padding: 2.5rem 2rem 2rem;
   position: relative;
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 24px rgba(6,11,43,0.06);
 }
+
+.tracks__card:nth-child(1) { background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 40%, #fce7f3 100%); }
+.tracks__card:nth-child(2) { background: linear-gradient(135deg, #fce7f3 0%, #fef3c7 40%, #ede9fe 100%); }
+.tracks__card:nth-child(3) { background: linear-gradient(135deg, #fef9c3 0%, #fce7f3 40%, #dbeafe 100%); }
+.tracks__card:nth-child(4) { background: linear-gradient(135deg, #d1fae5 0%, #dbeafe 40%, #fce7f3 100%); }
 
 .tracks__card:hover {
   transform: translateY(-4px);
@@ -811,25 +815,31 @@ ul { list-style: none; }
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 5px;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
 }
 
 .tracks__card:nth-child(1) .tracks__card-accent { background: var(--superblue); }
 .tracks__card:nth-child(2) .tracks__card-accent { background: var(--tomato); }
-.tracks__card:nth-child(3) .tracks__card-accent { background: var(--watermelon); }
+.tracks__card:nth-child(3) .tracks__card-accent { background: var(--tomato); }
 .tracks__card:nth-child(4) .tracks__card-accent { background: var(--kiwi); }
 
 .tracks__card-eyebrow {
   font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  opacity: 0.45;
   margin-bottom: 0.75rem;
+  font-weight: 700;
 }
 
+.tracks__card:nth-child(1) .tracks__card-eyebrow { color: var(--superblue); }
+.tracks__card:nth-child(2) .tracks__card-eyebrow { color: var(--tomato); }
+.tracks__card:nth-child(3) .tracks__card-eyebrow { color: var(--tomato); }
+.tracks__card:nth-child(4) .tracks__card-eyebrow { color: var(--kiwi); }
+
 .tracks__card-name {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
 }
@@ -837,15 +847,33 @@ ul { list-style: none; }
 .tracks__card-audience {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--superblue);
+  color: var(--navy);
+  opacity: 0.7;
   margin-bottom: 0.75rem;
 }
 
 .tracks__card-topics {
   font-size: 0.85rem;
   line-height: 1.6;
-  opacity: 0.65;
+  opacity: 0.55;
+  margin-bottom: 1rem;
 }
+
+.tracks__card-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--pill-radius);
+  font-weight: 700;
+}
+
+.tracks__card:nth-child(1) .tracks__card-badge { background: rgba(61,106,255,0.1); color: var(--superblue); }
+.tracks__card:nth-child(2) .tracks__card-badge { background: rgba(255,92,55,0.1); color: var(--tomato); }
+.tracks__card:nth-child(3) .tracks__card-badge { background: rgba(255,92,55,0.1); color: var(--tomato); }
+.tracks__card:nth-child(4) .tracks__card-badge { background: rgba(59,216,94,0.1); color: var(--kiwi); }
 
 .tracks__cta {
   text-align: center;
@@ -1587,31 +1615,35 @@ ul { list-style: none; }
     <div class="tracks__grid" id="agenda">
       <div class="tracks__card reveal">
         <div class="tracks__card-accent"></div>
-        <div class="tracks__card-eyebrow">Track 01</div>
+        <div class="tracks__card-eyebrow">Blue Room</div>
         <h3 class="tracks__card-name">Foundations Room</h3>
         <div class="tracks__card-audience">K-12 General Teachers</div>
         <p class="tracks__card-topics">AI Basics, Prompt Engineering for Educators, Classroom AI Tools</p>
+        <span class="tracks__card-badge">5 Sessions</span>
       </div>
       <div class="tracks__card reveal">
         <div class="tracks__card-accent"></div>
-        <div class="tracks__card-eyebrow">Track 02</div>
+        <div class="tracks__card-eyebrow">Red Room</div>
         <h3 class="tracks__card-name">Applied Room</h3>
         <div class="tracks__card-audience">CTE / STEM Teachers</div>
         <p class="tracks__card-topics">AI in Project-Based Learning, Machine Learning Demos, Student AI Projects</p>
+        <span class="tracks__card-badge">5 Sessions</span>
       </div>
       <div class="tracks__card reveal">
         <div class="tracks__card-accent"></div>
-        <div class="tracks__card-eyebrow">Track 03</div>
+        <div class="tracks__card-eyebrow">Orange Room</div>
         <h3 class="tracks__card-name">Ethics Room</h3>
         <div class="tracks__card-audience">Higher Ed Faculty</div>
         <p class="tracks__card-topics">Responsible AI, AI Policy in Schools, Academic Integrity</p>
+        <span class="tracks__card-badge">5 Sessions</span>
       </div>
       <div class="tracks__card reveal">
         <div class="tracks__card-accent"></div>
-        <div class="tracks__card-eyebrow">Track 04</div>
+        <div class="tracks__card-eyebrow">Green Room</div>
         <h3 class="tracks__card-name">Leadership Room</h3>
         <div class="tracks__card-audience">Administrators</div>
         <p class="tracks__card-topics">AI Strategy for Districts, Budget Planning for AI, Change Management</p>
+        <span class="tracks__card-badge">5 Sessions</span>
       </div>
     </div>
     <div class="tracks__cta reveal">
