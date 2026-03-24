@@ -960,13 +960,13 @@ ul { list-style: none; }
   z-index: 2;
   display: flex;
   justify-content: center;
-  margin: -10vw auto 2rem;
+  margin: -6vw auto 0;
+  padding-bottom: 2rem;
 }
 
 .marquee__icon svg {
-  width: clamp(120px, 18vw, 260px);
+  width: clamp(120px, 16vw, 220px);
   height: auto;
-  animation: coinSpin 16s linear infinite;
 }
 
 @keyframes coinSpin {
@@ -1288,7 +1288,7 @@ ul { list-style: none; }
   .sticky-widget { right: 1rem; bottom: 1rem; width: 260px; }
 
   .marquee-arc text { font-size: 80px; }
-  .marquee__icon { margin-top: -12vw; }
+  .marquee__icon { margin-top: -16vw; }
 }
 
 /* ========================================
@@ -1643,7 +1643,7 @@ ul { list-style: none; }
 <!-- ============ 10. CURVED TEXT MARQUEE ============ -->
 <section class="marquee-section">
   <div class="marquee-arc" aria-hidden="true">
-    <svg viewBox="0 0 1694 674" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 160 1694 514" preserveAspectRatio="xMidYMid meet">
       <defs>
         <path id="marqueeArc" d="M -847,643 Q 847,-329 2541,643" fill="none"/>
       </defs>
@@ -1655,18 +1655,39 @@ ul { list-style: none; }
     </svg>
   </div>
 
-  <!-- Decorative lightbulb icon -->
+  <!-- Decorative AI brain icon -->
   <div class="marquee__icon">
-    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="90" fill="url(#coinGrad2)" opacity="0.12"/>
-      <circle cx="100" cy="100" r="70" stroke="url(#coinGrad2)" stroke-width="2.5" fill="none" opacity="0.25"/>
-      <g transform="translate(60,35)">
-        <path d="M40 0C18 0 0 18 0 40c0 16 9 29 22 36v12c0 4 4 8 8 8h20c4 0 8-4 8-8V76c13-7 22-20 22-36C80 18 62 0 40 0z" fill="url(#coinGrad2)" opacity="0.6"/>
-        <line x1="24" y1="104" x2="56" y2="104" stroke="#3D6AFF" stroke-width="3" opacity="0.4"/>
-        <line x1="28" y1="114" x2="52" y2="114" stroke="#3D6AFF" stroke-width="3" opacity="0.3"/>
-        <path d="M40 12v40M24 32h32" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.5"/>
+    <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer glow ring -->
+      <circle cx="120" cy="120" r="110" fill="url(#brainGlow)" opacity="0.10"/>
+      <circle cx="120" cy="120" r="95" stroke="url(#brainGrad)" stroke-width="2" fill="none" opacity="0.20"/>
+      <!-- Brain shape -->
+      <g transform="translate(55,45)">
+        <!-- Left hemisphere -->
+        <path d="M65 10C50 2 32 5 22 18C12 31 10 48 18 63C12 68 8 76 8 85C8 98 18 109 32 112L32 130C32 135 36 138 40 138L90 138C94 138 98 135 98 130L98 112C112 109 122 98 122 85C122 76 118 68 112 63C120 48 118 31 108 18C98 5 80 2 65 10Z" fill="url(#brainGrad)" opacity="0.55"/>
+        <!-- Center divide -->
+        <line x1="65" y1="18" x2="65" y2="130" stroke="white" stroke-width="2" opacity="0.3" stroke-dasharray="4 4"/>
+        <!-- Neural connection dots -->
+        <circle cx="42" cy="50" r="4" fill="white" opacity="0.5"/>
+        <circle cx="88" cy="50" r="4" fill="white" opacity="0.5"/>
+        <circle cx="35" cy="80" r="3.5" fill="white" opacity="0.4"/>
+        <circle cx="95" cy="80" r="3.5" fill="white" opacity="0.4"/>
+        <circle cx="65" cy="65" r="5" fill="white" opacity="0.6"/>
+        <!-- Neural connections -->
+        <line x1="42" y1="50" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <line x1="88" y1="50" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <line x1="35" y1="80" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <line x1="95" y1="80" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
+        <!-- Circuit traces -->
+        <line x1="20" y1="95" x2="8" y2="95" stroke="url(#brainGrad)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+        <line x1="110" y1="95" x2="122" y2="95" stroke="url(#brainGrad)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
+        <circle cx="8" cy="95" r="2" fill="#3D6AFF" opacity="0.4"/>
+        <circle cx="122" cy="95" r="2" fill="#E523FF" opacity="0.4"/>
       </g>
-      <defs><linearGradient id="coinGrad2" x1="0" y1="0" x2="200" y2="200"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#E523FF"/></linearGradient></defs>
+      <defs>
+        <linearGradient id="brainGrad" x1="0" y1="0" x2="240" y2="240"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#E523FF"/></linearGradient>
+        <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%"><stop stop-color="#3D6AFF" stop-opacity="0.3"/><stop offset="1" stop-color="#E523FF" stop-opacity="0"/></radialGradient>
+      </defs>
     </svg>
   </div>
 </section>
