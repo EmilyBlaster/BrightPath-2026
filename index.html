@@ -1655,38 +1655,19 @@ ul { list-style: none; }
     </svg>
   </div>
 
-  <!-- Decorative AI brain icon -->
+  <!-- Decorative sparkle/star icon -->
   <div class="marquee__icon">
-    <svg viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Outer glow ring -->
-      <circle cx="120" cy="120" r="110" fill="url(#brainGlow)" opacity="0.10"/>
-      <circle cx="120" cy="120" r="95" stroke="url(#brainGrad)" stroke-width="2" fill="none" opacity="0.20"/>
-      <!-- Brain shape -->
-      <g transform="translate(55,45)">
-        <!-- Left hemisphere -->
-        <path d="M65 10C50 2 32 5 22 18C12 31 10 48 18 63C12 68 8 76 8 85C8 98 18 109 32 112L32 130C32 135 36 138 40 138L90 138C94 138 98 135 98 130L98 112C112 109 122 98 122 85C122 76 118 68 112 63C120 48 118 31 108 18C98 5 80 2 65 10Z" fill="url(#brainGrad)" opacity="0.55"/>
-        <!-- Center divide -->
-        <line x1="65" y1="18" x2="65" y2="130" stroke="white" stroke-width="2" opacity="0.3" stroke-dasharray="4 4"/>
-        <!-- Neural connection dots -->
-        <circle cx="42" cy="50" r="4" fill="white" opacity="0.5"/>
-        <circle cx="88" cy="50" r="4" fill="white" opacity="0.5"/>
-        <circle cx="35" cy="80" r="3.5" fill="white" opacity="0.4"/>
-        <circle cx="95" cy="80" r="3.5" fill="white" opacity="0.4"/>
-        <circle cx="65" cy="65" r="5" fill="white" opacity="0.6"/>
-        <!-- Neural connections -->
-        <line x1="42" y1="50" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
-        <line x1="88" y1="50" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
-        <line x1="35" y1="80" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
-        <line x1="95" y1="80" x2="65" y2="65" stroke="white" stroke-width="1.5" opacity="0.3"/>
-        <!-- Circuit traces -->
-        <line x1="20" y1="95" x2="8" y2="95" stroke="url(#brainGrad)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
-        <line x1="110" y1="95" x2="122" y2="95" stroke="url(#brainGrad)" stroke-width="2" opacity="0.3" stroke-linecap="round"/>
-        <circle cx="8" cy="95" r="2" fill="#3D6AFF" opacity="0.4"/>
-        <circle cx="122" cy="95" r="2" fill="#E523FF" opacity="0.4"/>
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 4-point sparkle star -->
+      <path d="M100 20 C104 70, 130 96, 180 100 C130 104, 104 130, 100 180 C96 130, 70 104, 20 100 C70 96, 96 70, 100 20Z" fill="url(#sparkleGrad)" opacity="0.7"/>
+      <!-- Inner smaller sparkle rotated -->
+      <g transform="translate(100,100) rotate(45) translate(-100,-100)">
+        <path d="M100 55 C102 80, 120 98, 145 100 C120 102, 102 120, 100 145 C98 120, 80 102, 55 100 C80 98, 98 80, 100 55Z" fill="url(#sparkleGrad)" opacity="0.35"/>
       </g>
+      <!-- Center dot -->
+      <circle cx="100" cy="100" r="6" fill="white" opacity="0.8"/>
       <defs>
-        <linearGradient id="brainGrad" x1="0" y1="0" x2="240" y2="240"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#E523FF"/></linearGradient>
-        <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%"><stop stop-color="#3D6AFF" stop-opacity="0.3"/><stop offset="1" stop-color="#E523FF" stop-opacity="0"/></radialGradient>
+        <linearGradient id="sparkleGrad" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop stop-color="#3D6AFF"/><stop offset="1" stop-color="#E523FF"/></linearGradient>
       </defs>
     </svg>
   </div>
