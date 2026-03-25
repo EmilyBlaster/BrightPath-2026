@@ -986,38 +986,6 @@ ul { list-style: none; }
   50% { transform: translateY(-14px); }
 }
 
-/* Diamond decorations */
-.diamond {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.diamond--tl {
-  top: 2rem;
-  left: 3rem;
-  transform: rotate(-20deg);
-  animation: diamondFloat1 12s ease-in-out infinite;
-}
-
-.diamond--br {
-  bottom: 4rem;
-  right: 3rem;
-  transform: rotate(20deg);
-  animation: diamondFloat2 15s ease-in-out infinite;
-}
-
-@keyframes diamondFloat1 {
-  0%, 100% { transform: translateY(0) rotate(-20deg); }
-  50% { transform: translateY(-18px) rotate(-15deg); }
-}
-
-@keyframes diamondFloat2 {
-  0%, 100% { transform: translateY(0) rotate(20deg); }
-  50% { transform: translateY(-14px) rotate(25deg); }
-}
 
 /* ========================================
    11. STATS / SOCIAL PROOF
@@ -2111,12 +2079,6 @@ ul { list-style: none; }
 
 <!-- ============ 10. CURVED TEXT MARQUEE ============ -->
 <section class="marquee-section">
-  <!-- Diamond decoration — bottom-right -->
-  <svg class="diamond diamond--br" viewBox="0 0 40 40" fill="none">
-    <path d="M20 0L40 20L20 40L0 20Z" fill="url(#dGradBR)"/>
-    <defs><linearGradient id="dGradBR" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#3BD85E" stop-opacity="0.4"/><stop offset="1" stop-color="#00D0E0" stop-opacity="0.2"/></linearGradient></defs>
-  </svg>
-
   <!-- Curved arc with scrolling text -->
   <div class="marquee-arc" aria-hidden="true">
     <svg viewBox="-100 0 2000 400" preserveAspectRatio="none">
@@ -2392,7 +2354,7 @@ ul { list-style: none; }
       let offset = 0;
 
       function animateMarquee() {
-        offset -= 0.5;                       /* scroll rightward along the bowl */
+        offset -= 0.8;                       /* scroll rightward along the bowl */
         if (offset <= -textLen) offset += textLen; /* seamless wrap */
 
         tp1.setAttribute('startOffset', offset);
